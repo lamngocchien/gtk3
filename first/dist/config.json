@@ -1,0 +1,11 @@
+{
+  "file1": "value2",
+  "file2": "value1",
+  "file_export": "value1",
+  "data":
+	{
+	"file1": "value2",
+	"file2": ["121212", "acacs", 3, "122222"],
+	"file_export":"hell121212o222"
+	}
+}
