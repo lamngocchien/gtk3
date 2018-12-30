@@ -5,7 +5,7 @@ import gi, os, time, re, codecs, paramiko
 from datetime import datetime
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
-
+from lib import *
 
 ProgramName = 'CorePyTools'
 ProgramWidth = 500
@@ -422,6 +422,10 @@ class MenuExampleWindow(Gtk.Window):
         stack.add_titled(about_box, 'About', 'About')
         # End About Tab
 
+# =========================================================================================================================================
+    # Define function
+# =========================================================================================================================================
+
     def update_config_file(self, widget):
         print 'Clicked Update Config'
         # self.levelbar.set_value(0)
@@ -469,6 +473,7 @@ class MenuExampleWindow(Gtk.Window):
         print "Clicked button_excel_json_export"
 
     def button_config_compare(self, widget):
+        print author
         print "Config Compare Final"
         now = datetime.today()
         print 'now: ', now
