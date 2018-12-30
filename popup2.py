@@ -4,11 +4,11 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('WebKit', '3.0')
 from gi.repository import Gtk, WebKit
 
-# web = WebKit.WebView()
+web = WebKit.WebView()
 
 def get_source(webobj, frame):
     print "loading..."
-    web = WebKit.WebView()
+    # web = WebKit.WebView()
     x = web.get_main_frame().get_data_source().get_data()
     # print x.str
 
@@ -16,13 +16,12 @@ class MainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="First")
         self.set_border_width(10)
-        self.set_size_request(200,100)
+        self.set_size_request(500,200)
 
         #layout
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         self.add(vbox)
         button = Gtk.Button("Popup")
-        # button.set_size_request(120,30)
         button.connect("clicked", self.button_clicked)
         vbox.pack_start(button, True, True, 0)
 
@@ -30,7 +29,7 @@ class MainWindow(Gtk.Window):
         print "Hello"
         win = Gtk.Window()
         win.set_default_size(800, 500)
-        web = WebKit.WebView()
+
         # web.open("http://google.com")
         uri = 'web/page.html'
         uri = os.path.realpath(uri)
@@ -40,6 +39,9 @@ class MainWindow(Gtk.Window):
         web.connect("load-finished", get_source)
         win.add(web)
         win.show_all()
+
+
+
 
 window = MainWindow()
 window.connect("delete-event", Gtk.main_quit)

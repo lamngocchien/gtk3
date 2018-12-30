@@ -45,7 +45,9 @@ def do_setup():
           author_email="admin@nwsvmc.com",
           maintainer="Core Part",
           maintainer_email="info@nwsvmc.com",
-          data_files=[("config", ["config.json"])],
+          data_files=[("config", ["config.json"]),
+                      # ("web", ["highcharts.js","page.html","series-label.js"]),
+                      ],
           # py_modules=["redstring"],
           windows=[
               {

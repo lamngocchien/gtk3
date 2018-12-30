@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import gi, os, time, re, codecs, paramiko
+import gi, os, time, re, codecs, paramiko, urlparse
 from datetime import datetime
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GObject
+gi.require_version('WebKit', '3.0')
+from gi.repository import Gtk, WebKit
 from lib import *
 
 ProgramName = 'CorePyTools'
 ProgramWidth = 500
 ProgramHeight = 450
 
+def get_source(webobj, frame):
+    print "loading..."
+    web = WebKit.WebView()
+    x = web.get_main_frame().get_data_source().get_data()
+    # print x.str
 
 def load_configs():
     from os import walk
@@ -493,6 +499,21 @@ class MenuExampleWindow(Gtk.Window):
         print 'path2: ', path2
         config = self.path3_config.get_text()
         print 'config: ', config
+
+        print "Show Highchart"
+        win = Gtk.Window()
+        win.set_default_size(800, 500)
+        web = WebKit.WebView()
+        # web.open("http://google.com")
+        uri = 'web/page.html'
+        uri = os.path.realpath(uri)
+        uri = urlparse.ParseResult('file', '', uri, '', '', '')
+        uri = urlparse.urlunparse(uri)
+        web.load_uri(uri)
+        web.connect("load-finished", get_source)
+        win.add(web)
+        win.show_all()
+
 
     def button_measurement_compare(self, widget):
         print "Measurement Compare Final"

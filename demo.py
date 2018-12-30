@@ -302,19 +302,7 @@ class MenuExampleWindow(Gtk.Window):
     def save_to_file(self, filename):
         self.user_edited_new_document = False
         print "User edited is: " + str(self.user_edited_new_document)
-        # function to write the file to computer
-        # file = open(filename, "w+")
-        # file.write('Hello')
-        #
-        # file.close()
-
-        # save old filename for later
-        # self.old_filename = filename
-
         import xlsxwriter
-        # with open('config.json', 'r') as f:
-        #     config = json.load(f)
-        # name = config['file_export']
 
         # print config['data']['file2'][0]
         workbook = xlsxwriter.Workbook(filename + '.xlsx')
