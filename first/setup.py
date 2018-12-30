@@ -37,9 +37,9 @@ for dll in gtk_dlls:
 # shutil.copy("_gi.pyd", cdir)
 
 def do_setup():
-    setup(name="CorePyTool",
+    setup(name="CorePyTools",
           version="2.0.2",
-          description="CorePyTool",
+          description="CorePyTools",
           author="CorePart",
           url="http://www.nwsvmc.com/",
           author_email="admin@nwsvmc.com",
@@ -50,8 +50,8 @@ def do_setup():
           windows=[
               {
                   'script': 'first.py',
-                  "icon_resources": [(1, "icon.ico")],
-                  "dest_base": "CorePyTool"
+                  "icon_resources": [(1, "corepytool.ico")],
+                  "dest_base": "CorePyTools"
               }
           ],
           options={"py2exe": {
