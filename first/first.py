@@ -33,8 +33,7 @@ class MenuExampleWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title=ProgramName)
         self.set_default_size(ProgramWidth, ProgramHeight)
-        self.user_edited_new_document = True
-        self.file_name_default = 'result.xlsx'
+
         #Main SiderBar
         grid = Gtk.Grid()
         self.add(grid)
@@ -49,8 +48,13 @@ class MenuExampleWindow(Gtk.Window):
         stacksidebar.set_stack(stack)
         grid.attach(stacksidebar, 0, 0, 1, 1)
 
+# =========================================================================================================================================
+        # Measurement
+# =========================================================================================================================================
 
         # Measurement Compare Tab
+        self.user_edited_new_document = True
+        self.file_name_default = 'result.xlsx'
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         # box_menu = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_content = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
@@ -159,8 +163,8 @@ class MenuExampleWindow(Gtk.Window):
         layout_last = Gtk.Box(spacing=10)
         layout_last.set_margin_right(10)
         layout_last.set_margin_bottom(5)
-        button_last = Gtk.Button("Comparasion")
-        button_last.connect("clicked", self.button_compare)
+        button_last = Gtk.Button("Measurement Compare")
+        button_last.connect("clicked", self.button_measurement_compare)
         label_last = Gtk.Label("")
         label_last.set_property("width-request", 400)
         layout_last.add(label_last)
@@ -169,11 +173,127 @@ class MenuExampleWindow(Gtk.Window):
         box_content_main.pack_start(layout_last, False, False, 10)
         # End Measurement Compare Tab
 
+# =========================================================================================================================================
+        # Configuration
+# =========================================================================================================================================
+
         # Configuration Compare Tab
-        label = Gtk.Label("Under Contruction")
-        stack.add_titled(label, 'Configuration Compare', 'Configuration Compare')
+        box_config = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_config = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        box_content_blank = Gtk.Box(spacing=10)
+        box_content_blank.set_size_request(1, 15)
+        box_content_main_config = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_config.pack_start(box_content_blank, False, False, 0)
+        box_content_config.pack_start(box_content_main_config, False, False, 0)
+
+        box_config.pack_start(box_content_config, False, False, 0)
+
+        # button 1
+        button1_config = Gtk.Button("Select Old")
+        button1_config.connect("clicked", self.config_compare_upload1)
+        button2_config = Gtk.Button("Select New")
+        button2_config.connect("clicked", self.config_compare_upload2)
+
+        # Path 1
+        self.path1_config = Gtk.Entry()
+        self.path1_config.set_property("width-request", 450)
+        self.path1_config.set_text("")
+        # Path 2
+        self.path2_config = Gtk.Entry()
+        self.path2_config.set_property("width-request", 450)
+        self.path2_config.set_text("")
+
+        # Add some config
+        layout3_config = Gtk.Box(spacing=10)
+        layout3_config.set_homogeneous(False)
+        vbox_left_config = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        vbox_left_config.set_homogeneous(False)
+        vbox_right_config = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        vbox_right_config.set_margin_right(10)
+        vbox_right_config.set_homogeneous(False)
+        # Make two columns
+        layout3_config.pack_start(vbox_left_config, True, True, 0)
+        layout3_config.pack_start(vbox_right_config, True, True, 0)
+
+        # Add to layout
+        label1_config = Gtk.Label("Old Prompt")
+        label2_config = Gtk.Label("New Prompt")
+
+        self.first_prompt_config = Gtk.Entry()
+        self.first_prompt_config.set_property("width-request", 450)
+        self.first_prompt_config.set_text("")
+        # Path 2
+        self.second_prompt_config = Gtk.Entry()
+        self.second_prompt_config.set_property("width-request", 450)
+        self.second_prompt_config.set_text("")
+
+        label3_config = Gtk.Label("Old Version")
+        label4_config = Gtk.Label("New Version")
+
+        self.first_version_config = Gtk.Entry()
+        self.first_version_config.set_property("width-request", 450)
+        self.first_version_config.set_text("")
+
+        # Path 2
+        self.second_version_config = Gtk.Entry()
+        self.second_version_config.set_property("width-request", 450)
+        self.second_version_config.set_text("")
+
+        button3_config = Gtk.Button("Select Config File")
+        button3_config.connect("clicked", self.config_compare_upload3)
+
+        # Path 3
+        self.path3_config = Gtk.Entry()
+        self.path3_config.set_property("width-request", 450)
+        self.path3_config.set_text("")
+
+
+        vbox_right_config.pack_start(self.path3_config, True, True, 0)
+        vbox_left_config.add(button3_config)
+        button1_config.set_margin_top(10)
+        self.path1_config.set_margin_top(10)
+
+
+        vbox_right_config.pack_start(self.path1_config, True, True, 0)
+        vbox_left_config.add(button1_config)
+        vbox_left_config.pack_start(label1_config, True, True, 0)
+        vbox_right_config.pack_start(self.first_prompt_config, True, True, 0)
+        vbox_left_config.pack_start(label3_config, True, True, 0)
+        vbox_right_config.pack_start(self.first_version_config, True, True, 0)
+
+        button2_config.set_margin_top(10)
+        button2_config.set_property("width-request", 120)
+        vbox_left_config.add(button2_config)
+        self.path2_config.set_margin_top(10)
+        vbox_right_config.add(self.path2_config)
+
+        vbox_left_config.pack_start(label2_config, True, True, 0)
+        vbox_right_config.pack_start(self.second_prompt_config, True, True, 0)
+        vbox_left_config.pack_start(label4_config, True, True, 0)
+        vbox_right_config.pack_start(self.second_version_config, True, True, 0)
+
+
+
+        layout_last_config = Gtk.Box(spacing=0)
+        layout_last_config.set_margin_right(10)
+        layout_last_config.set_margin_bottom(5)
+        button_last_config = Gtk.Button("Configuration Compare")
+        button_last_config.connect("clicked", self.button_config_compare)
+        label_last_config = Gtk.Label("")
+        label_last_config.set_property("width-request", 500)
+        layout_last_config.add(label_last_config)
+
+        layout_last_config.add(button_last_config)
+        box_content_main_config.pack_start(layout3_config, False, False, 10)
+        box_content_main_config.pack_start(layout_last_config, False, False, 0)
+
+        # label = Gtk.Label("Under Contruction")
+        stack.add_titled(box_config, 'Configuration Compare', 'Configuration Compare')
         # End Configuration Compare Tab
 
+#=========================================================================================================================================
+        # EXCEL TO JSON
+#=========================================================================================================================================
 
         # Excel to Json
         box_excel_to_json = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
@@ -235,6 +355,10 @@ class MenuExampleWindow(Gtk.Window):
         stack.add_titled(box_excel_to_json, 'Excel to Json', 'Excel to Json')
         # End Excel to Json
 
+# =========================================================================================================================================
+        # About
+# =========================================================================================================================================
+
         # About Tab
         about_box = Gtk.Box(spacing=10, orientation=Gtk.Orientation.VERTICAL)
         about_box.set_homogeneous(False)
@@ -268,30 +392,6 @@ class MenuExampleWindow(Gtk.Window):
             self.config = model[tree_iter][0]
             print("Selected: config=%s" % self.config)
 
-
-    def on_timeout(self, user_data):
-        """
-        Update value on the progress bar
-        """
-        if self.activity_mode:
-            self.progressbar.pulse()
-        else:
-            new_value = self.progressbar.get_fraction() + 0.01
-            print 'new_value: ', new_value
-            if new_value > 1:
-                new_value = 0
-                # self.timeout_id = GObject.timeout_add(9999999999999999999999, self.on_timeout, None)
-                self.save_export()
-                GObject.source_remove(self.timeout_id)
-
-
-            self.progressbar.set_fraction(new_value)
-
-        # As this is a timeout function, return True so that it
-        # continues to get called
-        # self.save_export()
-        return self.updating
-
     def save_export(self):
         # time.sleep(20)
         # self.begin = self.textbuffer.get_start_iter()
@@ -322,8 +422,27 @@ class MenuExampleWindow(Gtk.Window):
     def button_excel_json_export(self, widget):
         print "Clicked button_excel_json_export"
 
-    def button_compare(self, widget):
-        print "Compare Final"
+    def button_config_compare(self, widget):
+        print "Config Compare Final"
+        now = datetime.today()
+        print 'now: ', now
+        first_version = self.first_version_config.get_text()
+        print 'first_version: ',first_version
+        first_prompt = self.first_prompt_config.get_text()
+        print 'first_prompt: ', first_prompt
+        second_version = self.second_version_config.get_text()
+        print 'second_version: ', second_version
+        second_prompt = self.second_prompt.get_text()
+        print 'second_prompt: ', second_prompt
+        path1 = self.path1_config.get_text()
+        print 'path1: ', path1
+        path2 = self.path2_config.get_text()
+        print 'path2: ', path2
+        config = self.path3_config.get_text()
+        print 'config: ', config
+
+    def button_measurement_compare(self, widget):
+        print "Measurement Compare Final"
         now = datetime.today()
         print 'now: ', now
         first_version = self.first_version.get_text()
@@ -421,6 +540,68 @@ class MenuExampleWindow(Gtk.Window):
             print ("Cancel Clicked")
         dialog.destroy()
 
+    def config_compare_upload1(self, widget):
+        print "Go to config_compare_upload1"
+        dialog = Gtk.FileChooserDialog("Select a file", self, Gtk.FileChooserAction.OPEN,
+                                       ("Cancel", Gtk.ResponseType.CANCEL,
+                                        "Open", Gtk.ResponseType.OK
+                                        )
+                                       )
+        dialog.set_default_size(800, 400)
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            print "Open Clicked"
+            print ("File: " + dialog.get_filename())
+            self.path1_config.set_text(unicode(dialog.get_filename(), "utf-8"))
+            # print ("Path: "+dialog.get_file())
+            # fp = open(self.path1.get_text)
+            # for line in fp:
+            #     print line
+        elif response == Gtk.ResponseType.CANCEL:
+            print ("Cancel Clicked")
+        dialog.destroy()
+
+    def config_compare_upload2(self, widget):
+        print "Go to config_compare_upload2"
+        dialog = Gtk.FileChooserDialog("Select a file", self, Gtk.FileChooserAction.OPEN,
+                                       ("Cancel", Gtk.ResponseType.CANCEL,
+                                        "Open", Gtk.ResponseType.OK
+                                        )
+                                       )
+        dialog.set_default_size(800, 400)
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            print "Open Clicked"
+            print ("File: " + dialog.get_filename())
+            self.path2_config.set_text(unicode(dialog.get_filename(), "utf-8"))
+            # print ("Path: "+dialog.get_file())
+            # fp = open(self.path1.get_text)
+            # for line in fp:
+            #     print line
+        elif response == Gtk.ResponseType.CANCEL:
+            print ("Cancel Clicked")
+        dialog.destroy()
+
+    def config_compare_upload3(self, widget):
+        print "Go to config_compare_upload3"
+        dialog = Gtk.FileChooserDialog("Select a file", self, Gtk.FileChooserAction.OPEN,
+                                       ("Cancel", Gtk.ResponseType.CANCEL,
+                                        "Open", Gtk.ResponseType.OK
+                                        )
+                                       )
+        dialog.set_default_size(800, 400)
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            print "Open Clicked"
+            print ("File: " + dialog.get_filename())
+            self.path3_config.set_text(unicode(dialog.get_filename(), "utf-8"))
+            # print ("Path: "+dialog.get_file())
+            # fp = open(self.path1.get_text)
+            # for line in fp:
+            #     print line
+        elif response == Gtk.ResponseType.CANCEL:
+            print ("Cancel Clicked")
+        dialog.destroy()
 
     def measurement_compare_upload1(self, widget):
         print "Go to button_clicked1"
