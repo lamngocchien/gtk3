@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import gi, os, time, re, codecs
+import gi, os, time, re, codecs, paramiko
 from datetime import datetime
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
@@ -185,7 +185,7 @@ class MenuExampleWindow(Gtk.Window):
         box_content_main_config = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_content_config.pack_start(box_content_blank, False, False, 0)
         box_content_config.pack_start(box_content_main_config, False, False, 0)
-        label = Gtk.Label("Under Contruction")
+        label = Gtk.Label("Under Combination")
         label.set_margin_top(10)
         box_content_main_config.add(label)
         box_config.pack_start(box_content_config, False, False, 0)
@@ -305,13 +305,34 @@ class MenuExampleWindow(Gtk.Window):
         box_content_main_protocol = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_content_protocol.pack_start(box_content_blank, False, False, 0)
         box_content_protocol.pack_start(box_content_main_protocol, False, False, 0)
-        label = Gtk.Label("Under Contruction")
+        label = Gtk.Label("Under Combination")
         label.set_margin_top(10)
         box_content_main_protocol.add(label)
         box_protocol.pack_start(box_content_protocol, False, False, 0)
 
-        # label = Gtk.Label("Under Contruction")
+        # label = Gtk.Label("Under Adding")
         stack.add_titled(box_protocol, 'Protocol Compare', 'Protocol Compare')
+        # End Protocol Compare Tab
+
+# =========================================================================================================================================
+        # Measurement Graph
+# =========================================================================================================================================
+
+        # Protocol Compare Tab
+        box_mgraph = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_mgraph = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        box_content_blank = Gtk.Box(spacing=10)
+        box_content_blank.set_size_request(1, 15)
+        box_content_main_mgraph = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_mgraph.pack_start(box_content_blank, False, False, 0)
+        box_content_mgraph.pack_start(box_content_main_mgraph, False, False, 0)
+        label = Gtk.Label("Under Combination")
+        label.set_margin_top(10)
+        box_content_main_mgraph.add(label)
+        box_mgraph.pack_start(box_content_mgraph, False, False, 0)
+
+        # label = Gtk.Label("Under Contruction")
+        stack.add_titled(box_mgraph, 'Measurement Graph', 'Measurement Graph')
         # End Protocol Compare Tab
 
 #=========================================================================================================================================
@@ -470,6 +491,7 @@ class MenuExampleWindow(Gtk.Window):
         print "Measurement Compare Final"
         now = datetime.today()
         print 'now: ', now
+        print 'paramiko:', paramiko.__version__
         first_version = self.first_version.get_text()
         print 'first_version: ',first_version
         first_prompt = self.first_prompt.get_text()

@@ -58,7 +58,12 @@ def do_setup():
               "unbuffered": True,
               "compressed": True,
               "bundle_files": 3,
-              'packages': ['gi','xlsxwriter','json'],
+              'packages': ['gi','xlsxwriter','json',
+                           'paramiko',
+                           # 'pyans1','six','pycparser',
+                           'cffi',
+                           # 'ans1crypto','enum34','idna','ipaddress','crystography','pynacl'
+                           ],
               # 'includes': ['gi','xlsxwriter','json'],
               'dll_excludes': [
                   'OLEAUT32.dll','USER32.dll', 'IMM32.dll', 'SHELL32.dll', 'KERNEL32.dll',
