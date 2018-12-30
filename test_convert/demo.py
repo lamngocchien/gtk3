@@ -14,7 +14,7 @@ class MainWindow(Gtk.Window):
         self.button = Gtk.Button(label="Click Here")
         self.button.connect("clicked", self.button_clicked)
         self.add(self.button)
-        self.set_size_request(100, 100)
+        self.set_size_request(300, 100)
 
     # make sure to pass in widget, wont work if you dont (more about widgets later)
     def button_clicked(self, widget):

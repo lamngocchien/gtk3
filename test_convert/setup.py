@@ -49,7 +49,7 @@ setup(name="CoreP-MC",
       windows=[
           {
               'script': 'demo.py',
-              # "icon-resources": [(1, "redstring.ico")]
+              "icon-resources": [(1, "icon.ico")]
           }
       ],
       options={"py2exe": {

@@ -36,39 +36,42 @@ for dll in gtk_dlls:
 
 # shutil.copy("_gi.pyd", cdir)
 
-setup(name="CoreP-MC",
-      version="2.0.2",
-      description="Measurement Comparasion",
-      author="CorePart",
-      # url="http://www.mousepawgames.com/",
-      # author_email="info@mousepawgames.com",
-      # maintainer="MousePaw Labs",
-      # maintainer_email="info@mousepawgames.com",
-      data_files=[("", ["config.json"])],
-      # py_modules=["redstring"],
-      windows=[
-          {
-              'script': 'first.py',
-              # "icon-resources": [(1, "Compare.ico")]
-          }
-      ],
-      options={"py2exe": {
-          "unbuffered": True,
-          "compressed": True,
-          "bundle_files": 3,
-          'packages': ['gi','xlsxwriter','json'],
-          # 'includes': ['gi','xlsxwriter','json'],
-          'dll_excludes': [
-              'OLEAUT32.dll','USER32.dll', 'IMM32.dll', 'SHELL32.dll', 'KERNEL32.dll',
-              'WINMM.dll','COMDLG32.dll','ADVAPI32.dll','COMCTL32.dll','WS2_32.dll',
-              'GDI32.dll','RPCRT4.dll','ole32.dll','msvcrt.dll','ntdll.dll',
+def do_setup():
+    setup(name="CoreP-MC",
+          version="2.0.2",
+          description="Measurement Comparasion",
+          author="CorePart",
+          # url="http://www.mousepawgames.com/",
+          # author_email="info@mousepawgames.com",
+          # maintainer="MousePaw Labs",
+          # maintainer_email="info@mousepawgames.com",
+          data_files=[("", ["config.json"])],
+          # py_modules=["redstring"],
+          windows=[
+              {
+                  'script': 'first.py',
+                  "icon_resources": [(1, "icon.ico")],
+                  "dest_base": "compare"
+              }
           ],
-      }},
-      zipfile="shared.lib",
-      # zipfile=None,
-      )
+          options={"py2exe": {
+              "unbuffered": True,
+              "compressed": True,
+              "bundle_files": 3,
+              'packages': ['gi','xlsxwriter','json'],
+              # 'includes': ['gi','xlsxwriter','json'],
+              'dll_excludes': [
+                  'OLEAUT32.dll','USER32.dll', 'IMM32.dll', 'SHELL32.dll', 'KERNEL32.dll',
+                  'WINMM.dll','COMDLG32.dll','ADVAPI32.dll','COMCTL32.dll','WS2_32.dll',
+                  'GDI32.dll','RPCRT4.dll','ole32.dll','msvcrt.dll','ntdll.dll',
+              ],
+          }},
+          # zipfile="shared.lib",
+          zipfile=None,
+          )
 
-
+do_setup()
+do_setup() #For apply icon
 
 for dll in tmp_dlls:
     shutil.copy(dll, dest_dir)
