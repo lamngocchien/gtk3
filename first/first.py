@@ -293,6 +293,27 @@ class MenuExampleWindow(Gtk.Window):
         stack.add_titled(box_config, 'Configuration Compare', 'Configuration Compare')
         # End Configuration Compare Tab
 
+# =========================================================================================================================================
+        # Protocol Compare
+# =========================================================================================================================================
+
+        # Protocol Compare Tab
+        box_protocol = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_protocol = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        box_content_blank = Gtk.Box(spacing=10)
+        box_content_blank.set_size_request(1, 15)
+        box_content_main_protocol = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_protocol.pack_start(box_content_blank, False, False, 0)
+        box_content_protocol.pack_start(box_content_main_protocol, False, False, 0)
+        label = Gtk.Label("Under Contruction")
+        label.set_margin_top(10)
+        box_content_main_protocol.add(label)
+        box_protocol.pack_start(box_content_protocol, False, False, 0)
+
+        # label = Gtk.Label("Under Contruction")
+        stack.add_titled(box_protocol, 'Protocol Compare', 'Protocol Compare')
+        # End Protocol Compare Tab
+
 #=========================================================================================================================================
         # EXCEL TO JSON
 #=========================================================================================================================================
@@ -369,8 +390,8 @@ class MenuExampleWindow(Gtk.Window):
         about_box.set_border_width(10)
         label = Gtk.Label()
         label.set_text("CorePyTools"
-                       "\n_________________________________________________________________"
-                       "___________________________________________________________________\n"
+                       "\n____________________________________________________________________"
+                       "______________________________________________________________________\n"
                        "\nVersion 1.0.0"
                        "\nDeveloped by lam.chien"
                        "\nPublished on 2 Jan 2019"
@@ -651,3 +672,26 @@ window = MenuExampleWindow()
 window.connect("destroy", Gtk.main_quit)
 window.show_all()
 Gtk.main()
+
+
+
+# # =========================================================================================================================================
+#         # Protocol Compare
+# # =========================================================================================================================================
+#
+#         # Protocol Compare Tab
+#         box_protocol = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+#         box_content_protocol = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+#         box_content_blank = Gtk.Box(spacing=10)
+#         box_content_blank.set_size_request(1, 15)
+#         box_content_main_protocol = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+#         box_content_protocol.pack_start(box_content_blank, False, False, 0)
+#         box_content_protocol.pack_start(box_content_main_protocol, False, False, 0)
+#         label = Gtk.Label("Under Contruction")
+#         label.set_margin_top(10)
+#         box_content_main_protocol.add(label)
+#         box_protocol.pack_start(box_content_protocol, False, False, 0)
+#
+#         # label = Gtk.Label("Under Contruction")
+#         stack.add_titled(box_protocol, 'Protocol Compare', 'Protocol Compare')
+#         # End Protocol Compare Tab
