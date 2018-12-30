@@ -11,13 +11,6 @@ ProgramName = 'CorePyTools'
 ProgramWidth = 500
 ProgramHeight = 450
 
-UI_INFO = """
-<ui>
-  <menubar name='MenuBar'>
-    <menuitem action='About' />
-  </menubar>
-</ui>
-"""
 
 def load_configs():
     from os import walk
@@ -183,8 +176,63 @@ class MenuExampleWindow(Gtk.Window):
 
 
         # Excel to Json
+        box_excel_to_json = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_excel_to_json  = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        box_content_blank = Gtk.Box(spacing=10)
+        box_content_blank.set_size_request(1, 15)
+        box_content_main_excel_to_json = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        box_content_excel_to_json.pack_start(box_content_blank, False, False, 0)
+        box_content_excel_to_json.pack_start(box_content_main_excel_to_json, False, False, 0)
+        box_excel_to_json.pack_start(box_content_excel_to_json, False, False, 0)
+
+        # button 1
+        button_excel_to_json = Gtk.Button("Select Excel")
+        button_excel_to_json.set_property("width-request", 130)
+        button_excel_to_json.connect("clicked", self.excel_to_json_upload)
+        # Path 1
+        self.path_excel_to_json = Gtk.Entry()
+        self.path_excel_to_json.set_property("width-request", 450)
+        self.path_excel_to_json.set_text("")
+
+        layout_excel = Gtk.Box(spacing=10)
+        layout_excel.set_homogeneous(False)
+        vbox_left_excel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        vbox_left_excel.set_homogeneous(False)
+        vbox_right_excel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        vbox_right_excel.set_margin_right(10)
+        vbox_right_excel.set_homogeneous(False)
+        # Make two columns
+        layout_excel.pack_start(vbox_left_excel, True, True, 0)
+        layout_excel.pack_start(vbox_right_excel, True, True, 0)
+
+        button_excel_to_json.set_margin_top(10)
+        self.path_excel_to_json.set_margin_top(10)
+        vbox_left_excel.add(button_excel_to_json)
+        vbox_right_excel.add(self.path_excel_to_json)
+        # label = Gtk.Label("Under Contruction")
+        # label.set_margin_top(10)
+        # box_content_main_excel_to_json.pack_start(label, False, False, 0)
+        box_content_main_excel_to_json.pack_start(layout_excel, False, False, 0)
+
+        layout_last_excel = Gtk.Box(spacing=10)
+        layout_last_excel.set_margin_right(10)
+        layout_last_excel.set_margin_bottom(5)
+        button_last_excel = Gtk.Button("Export")
+        button_last_excel.set_margin_end(400)
+        button_last_excel.set_margin_top(10)
+        button_last_excel.connect("clicked", self.button_excel_json_export)
+        label_last_excel = Gtk.Label("")
+        label_last_excel.set_property("width-request", 450)
+        layout_last_excel.add(label_last_excel)
+        # layout_last.add(button_update)
+        vbox_right_excel.add(button_last_excel)
+        # layout_last.add(button_last)
+        box_content_main_excel_to_json.pack_start(layout_last_excel, False, False, 10)
+
+
         label = Gtk.Label("Under Contruction")
-        stack.add_titled(label, 'Excel to Json', 'Excel to Json')
+
+        stack.add_titled(box_excel_to_json, 'Excel to Json', 'Excel to Json')
         # End Excel to Json
 
         # About Tab
@@ -271,13 +319,13 @@ class MenuExampleWindow(Gtk.Window):
             self.save_to_file(filename)
         dialog.destroy()
 
+    def button_excel_json_export(self, widget):
+        print "Clicked button_excel_json_export"
+
     def button_compare(self, widget):
+        print "Compare Final"
         now = datetime.today()
         print 'now: ', now
-        self.activity_mode = False
-        # self.timeout_id = GObject.timeout_add(360, self.on_timeout, None)
-        # GObject.source_remove(self.timeout_id)
-        print "Compare Final"
         first_version = self.first_version.get_text()
         print 'first_version: ',first_version
         first_prompt = self.first_prompt.get_text()
@@ -296,6 +344,7 @@ class MenuExampleWindow(Gtk.Window):
         fp = open(unicode(path2, "utf-8"))
         for line in fp:
             print line
+
         self.file_name_default = first_prompt.replace(' ','_') + first_version.replace(' ','_') + '_'
         self.file_name_default += second_prompt.replace(' ','_') + second_version.replace(' ','_')
         self.file_name_default += str(now.year)
@@ -350,6 +399,28 @@ class MenuExampleWindow(Gtk.Window):
         worksheet.write(row, 1, '=SUM(B1:B4)')
 
         workbook.close()
+
+    def excel_to_json_upload(self, widget):
+        print "Go to excel_to_json_upload"
+        dialog = Gtk.FileChooserDialog("Select a file", self, Gtk.FileChooserAction.OPEN,
+                                       ("Cancel", Gtk.ResponseType.CANCEL,
+                                        "Open", Gtk.ResponseType.OK
+                                        )
+                                       )
+        dialog.set_default_size(800, 400)
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            print "Open Clicked"
+            print ("File: " + dialog.get_filename())
+            self.path_excel_to_json.set_text(unicode(dialog.get_filename(), "utf-8"))
+            # print ("Path: "+dialog.get_file())
+            # fp = open(self.path1.get_text)
+            # for line in fp:
+            #     print line
+        elif response == Gtk.ResponseType.CANCEL:
+            print ("Cancel Clicked")
+        dialog.destroy()
+
 
     def measurement_compare_upload1(self, widget):
         print "Go to button_clicked1"
