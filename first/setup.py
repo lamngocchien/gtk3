@@ -16,7 +16,7 @@ tmp_dlls = []
 cdir = os.getcwd()
 dest_dir = os.path.join(cdir, 'dist')
 
-sub_folder = ["export","import"]
+sub_folder = ["export","import","config"]
 
 for sub in sub_folder:
     sub_dir = os.path.join(dest_dir, sub)
@@ -37,21 +37,21 @@ for dll in gtk_dlls:
 # shutil.copy("_gi.pyd", cdir)
 
 def do_setup():
-    setup(name="CoreP-MC",
+    setup(name="CorePyTool",
           version="2.0.2",
-          description="Measurement Comparasion",
+          description="CorePyTool",
           author="CorePart",
-          # url="http://www.mousepawgames.com/",
-          # author_email="info@mousepawgames.com",
-          # maintainer="MousePaw Labs",
-          # maintainer_email="info@mousepawgames.com",
-          data_files=[("", ["config.json"])],
+          url="http://www.nwsvmc.com/",
+          author_email="admin@nwsvmc.com",
+          maintainer="Core Part",
+          maintainer_email="info@nwsvmc.com",
+          data_files=[("config", ["config.json"])],
           # py_modules=["redstring"],
           windows=[
               {
                   'script': 'first.py',
                   "icon_resources": [(1, "icon.ico")],
-                  "dest_base": "compare"
+                  "dest_base": "CorePyTool"
               }
           ],
           options={"py2exe": {

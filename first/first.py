@@ -1,10 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import gi, os, time, re, codecs
 from datetime import datetime
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
 
 
-ProgramName = 'TextCompare'
+ProgramName = 'CorePyTool'
 ProgramWidth = 500
 ProgramHeight = 450
 
@@ -19,6 +22,7 @@ UI_INFO = """
 def load_configs():
     from os import walk
     mypath = os.getcwd()
+    mypath = os.path.join(mypath, "config")
     files = []
     for (dirpath, dirnames, filenames) in walk(mypath):
         files.extend(filenames)
@@ -71,7 +75,7 @@ class MenuExampleWindow(Gtk.Window):
         # action_group.add_action(action_filequit)
 
         # About
-        action_about = Gtk.Action("About", "About", None, None)
+        action_about = Gtk.Action("About", " About ", 5, None)
         action_about.connect("activate", self.on_menu_about)
         action_about.set_tooltip('About')
         action_group.add_action(action_about)
@@ -89,23 +93,45 @@ class MenuExampleWindow(Gtk.Window):
 
         uimanager.insert_action_group(action_group)
         menubar = uimanager.get_widget("/MenuBar")
+
+
+        #Main SiderBar
+        grid = Gtk.Grid()
+        self.add(grid)
+
+        stack = Gtk.Stack()
+        stack.set_homogeneous(False)
+        stack.set_hexpand(True)
+        stack.set_vexpand(True)
+        grid.attach(stack, 1, 0, 1, 1)
+
+        stacksidebar = Gtk.StackSidebar()
+        stacksidebar.set_stack(stack)
+        grid.attach(stacksidebar, 0, 0, 1, 1)
+
+
+
+
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_menu = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_content = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
 
-        box_content_blank =  Gtk.Box(spacing=8)
-        box_content_blank.set_size_request(1,5)
+        box_content_blank =  Gtk.Box(spacing=10)
+        box_content_blank.set_size_request(1,15)
         box_content_main = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_content.pack_start(box_content_blank, False, False, 0)
         box_content.pack_start(box_content_main, False, False, 0)
 
-        box.pack_start(box_menu, False, False, 0)
+        # box.pack_start(box_menu, False, False, 0)
         box_menu.pack_start(menubar, False, False, 0)
         box.pack_start(box_content, False, False, 0)
 
+        # label = Gtk.Label("Stack Content on Page %i" % (page))
+
 
         # Add button
-        self.add(box)
+        # self.add(box)
+        stack.add_titled(box, 'Measurement Compare', 'Measurement Compare')
 
         # layout2 = Gtk.Box(spacing=10)
         # box.add(layout)
@@ -275,6 +301,33 @@ class MenuExampleWindow(Gtk.Window):
         box_content_main.pack_start(layout_last, False, False, 10)
 
         self.file_name_default = 'result.xlsx'
+
+        label = Gtk.Label("Under Contruction")
+        stack.add_titled(label, 'Configuration Compare', 'Configuration Compare')
+        label = Gtk.Label("Under Contruction")
+        stack.add_titled(label, 'Excel To Json', 'Excel To Json')
+        # label = Gtk.Label("Under Contruction")
+        about_box = Gtk.Box(spacing=10, orientation=Gtk.Orientation.VERTICAL)
+        about_box.set_homogeneous(False)
+        about_box.set_border_width(10)
+        # about_box.set_size_request(500,400)
+        # about_box.set_margin_top(10)
+        # about_box.set_margin_left(10)
+        # about_box.set_margin_right(10)
+        # about_box.set_margin_bottom(10)
+        label = Gtk.Label()
+        label.set_text("CorePyTool"
+                       "\n_________________________________________________________________"
+                       "___________________________________________________________________\n"
+                       "\nVersion 1.0.0"
+                       "\nDeveloped by lam.chien"
+                       "\nPublished on 2 Jan 2019"
+                       "\nSupport: Some kind of measurement on (v)MME, (v)GW")
+        label.set_justify(Gtk.Justification.LEFT)
+
+        about_box.pack_start(label, False, False, 0)
+
+        stack.add_titled(about_box, 'About', 'About')
 
     def update_config_file(self, widget):
         print 'Clicked Update Config'
