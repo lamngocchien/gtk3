@@ -20,12 +20,12 @@ def load_configs():
     for (dirpath, dirnames, filenames) in walk(mypath):
         files.extend(filenames)
         break
-    print files
+    # print files
     json_list = []
     for file in files:
         if file.endswith('.json'):
             json_list.append(file)
-    print json_list
+    # print json_list
     return json_list
 
 class MenuExampleWindow(Gtk.Window):
@@ -400,6 +400,8 @@ class MenuExampleWindow(Gtk.Window):
         # box_content_main_excel_to_json.pack_start(label, False, False, 0)
         stack.add_titled(box_excel_to_json, 'Excel to Json', 'Excel to Json')
         # End Excel to Json
+
+        self.path1_config.set_text(author)
 
 # =========================================================================================================================================
         # About
