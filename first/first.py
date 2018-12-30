@@ -185,7 +185,9 @@ class MenuExampleWindow(Gtk.Window):
         box_content_main_config = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box_content_config.pack_start(box_content_blank, False, False, 0)
         box_content_config.pack_start(box_content_main_config, False, False, 0)
-
+        label = Gtk.Label("Under Contruction")
+        label.set_margin_top(10)
+        box_content_main_config.add(label)
         box_config.pack_start(box_content_config, False, False, 0)
 
         # button 1
@@ -304,7 +306,9 @@ class MenuExampleWindow(Gtk.Window):
         box_content_excel_to_json.pack_start(box_content_blank, False, False, 0)
         box_content_excel_to_json.pack_start(box_content_main_excel_to_json, False, False, 0)
         box_excel_to_json.pack_start(box_content_excel_to_json, False, False, 0)
-
+        label = Gtk.Label("Under Contruction")
+        label.set_margin_top(10)
+        box_content_main_excel_to_json.add(label)
         # button 1
         button_excel_to_json = Gtk.Button("Select Excel")
         button_excel_to_json.set_property("width-request", 130)
@@ -350,8 +354,8 @@ class MenuExampleWindow(Gtk.Window):
         box_content_main_excel_to_json.pack_start(layout_last_excel, False, False, 10)
 
 
-        label = Gtk.Label("Under Contruction")
 
+        # box_content_main_excel_to_json.pack_start(label, False, False, 0)
         stack.add_titled(box_excel_to_json, 'Excel to Json', 'Excel to Json')
         # End Excel to Json
 
@@ -364,7 +368,7 @@ class MenuExampleWindow(Gtk.Window):
         about_box.set_homogeneous(False)
         about_box.set_border_width(10)
         label = Gtk.Label()
-        label.set_text("CorePyTool"
+        label.set_text("CorePyTools"
                        "\n_________________________________________________________________"
                        "___________________________________________________________________\n"
                        "\nVersion 1.0.0"
@@ -470,7 +474,6 @@ class MenuExampleWindow(Gtk.Window):
         self.file_name_default += str(now.month)
         self.file_name_default += str(now.day)
         self.file_name_default += '.xlsx'
-
 
         self.save_export()
 
